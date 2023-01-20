@@ -1,0 +1,41 @@
+const express = require("express");
+const router = express.Router();
+const Db = require("./dbconn");
+const http = require("http");
+const cors = require("cors");
+const app = express();
+const port = process.env.PORT || 5000;
+const bodyParser = require("body-parser");
+
+
+
+const server = http.createServer((req, res) => {
+  res.end("Server is running on port 5000");
+});
+
+const whitelist = ["http://localhost:3000"];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use('/', require('./crudAPI'));
+
+app.get("/", (req, res) => {
+  res.send({ message: "Hello World!" });
+});
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+module.exports = router;
