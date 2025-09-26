@@ -1,6 +1,7 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
-
-mongoose.connect('mongodb+srv://karbivskij:Ay5vj1n1BuWi2P9W@cluster0.vvlwsxc.mongodb.net/Passwords?retryWrites=true&w=majority', {
+const DB_AUTH = process.env.DB_AUTH;
+mongoose.connect(DB_AUTH, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
