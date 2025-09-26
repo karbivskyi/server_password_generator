@@ -1,3 +1,5 @@
+![Password Manager Server showcase](images/password_manager_server_showcase.png)
+
 To run the application you need to:
 
 * Install dependencies with `npm i`
